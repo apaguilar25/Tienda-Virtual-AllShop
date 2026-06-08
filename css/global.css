@@ -1,0 +1,49 @@
+:root {
+    /* Sistema de Colores iOS Light */
+    --ios-bg: #f2f2f7;
+    --ios-surface: rgba(255, 255, 255, 0.75);
+    --ios-surface-solid: #ffffff;
+    --ios-primary: #007aff;
+    --ios-success: #34c759;
+    --ios-warning: #ff9500;
+    --ios-danger: #ff3b30;
+    --ios-text: #000000;
+    --ios-text-secondary: #8e8e93;
+    --ios-border: rgba(0, 0, 0, 0.1);
+    
+    /* Configuración de Estilo */
+    --ios-blur: blur(20px);
+    --ios-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --ios-radius: 14px;
+    --ios-radius-pill: 24px;
+    
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+[data-theme="dark"] {
+    /* Sistema de Colores iOS Dark */
+    --ios-bg: #000000;
+    --ios-surface: rgba(28, 28, 30, 0.75);
+    --ios-surface-solid: #1c1c1e;
+    --ios-text: #ffffff;
+    --ios-text-secondary: #aeaeb2;
+    --ios-border: rgba(255, 255, 255, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--ios-font);
+    background-color: var(--ios-bg);
+    color: var(--ios-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--ios-primary);
+    text-decoration: none;
+}

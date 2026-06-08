@@ -1,0 +1,78 @@
+.hero-showcase {
+    background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-primary) 100%);
+    border-radius: 20px;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 24px;
+    border: 0.5px solid var(--border-color);
+}
+
+.hero-showcase h1 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.hero-showcase p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.pillar-card {
+    background-color: var(--bg-surface);
+    padding: 16px;
+    border-radius: var(--radius-standard);
+    border: 0.5px solid var(--border-color);
+}
+
+.pillar-card span {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.pillar-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.pillar-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.horizontal-carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+}
+
+.horizontal-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.stacked-testimonials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-opinion {
+    background-color: var(--bg-surface);
+    padding: 16px;
+    border-radius: var(--radius-standard);
+    border: 0.5px solid var(--border-color);
+}

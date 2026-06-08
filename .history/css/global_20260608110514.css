@@ -1,0 +1,169 @@
+/* Variables de Diseño Minimalista Premium */
+:root {
+    --bg-primary: #f2f2f7;
+    --bg-surface: #ffffff;
+    --bg-neutral: #e5e5ea;
+    --accent: #007aff;
+    --success: #34c759;
+    --text-main: #000000;
+    --text-muted: #8e8e93;
+    --border-color: #c6c6c8;
+    --nav-blur: rgba(255, 255, 255, 0.8);
+    --radius-standard: 12px;
+    --radius-pills: 20px;
+    --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.dark-theme {
+    --bg-primary: #000000;
+    --bg-surface: #1c1c1e;
+    --bg-neutral: #2c2c2e;
+    --accent: #0a84ff;
+    --success: #30d158;
+    --text-main: #ffffff;
+    --text-muted: #8e8e93;
+    --border-color: #38383a;
+    --nav-blur: rgba(28, 28, 30, 0.8);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-base);
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    padding-top: 50px;
+    padding-bottom: 80px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Barra de Navegación Superior */
+.top-nav-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 50px;
+    background: var(--nav-blur);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 100;
+}
+
+.nav-title {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.5px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Tab Bar Inferior Alternativo */
+.bottom-tab-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 65px;
+    background: var(--nav-blur);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 0.5px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 8px;
+    z-index: 100;
+}
+
+.tab-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    width: 20%;
+    font-size: 10px;
+}
+
+.tab-link.active {
+    color: var(--accent);
+}
+
+.tab-icon {
+    font-size: 22px;
+    margin-bottom: 2px;
+}
+
+/* Botones Comunes */
+.btn-prime {
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-standard);
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.btn-prime:active {
+    filter: brightness(0.85);
+}
+
+/* Inputs de Lista */
+.input-fields-group {
+    background-color: var(--bg-surface);
+    border-radius: var(--radius-standard);
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 0.5px solid var(--border-color);
+}
+
+.field-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 16px;
+    outline: none;
+    border-bottom: 0.5px solid var(--border-color);
+}
+
+.field-input:last-child {
+    border-bottom: none;
+}
+
+/* Footer */
+.app-footer {
+    padding: 20px 16px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    background-color: var(--bg-surface);
+    border-top: 0.5px solid var(--border-color);
+    margin-top: 40px;
+}
+
+.status-indicator {
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: 6px;
+}

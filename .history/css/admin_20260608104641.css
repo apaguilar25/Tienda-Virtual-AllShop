@@ -1,0 +1,58 @@
+/* Elementos de administración y métricas */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.metric-box {
+    background-color: var(--ios-surface);
+    padding: 16px;
+    border-radius: 14px;
+    border: 0.5px solid var(--ios-border);
+}
+
+.metric-box h5 {
+    color: var(--ios-text-secondary);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.metric-box p {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+/* Gráfico Puro CSS */
+.ios-chart {
+    background-color: var(--ios-surface);
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 12px;
+    border: 0.5px solid var(--ios-border);
+}
+
+.chart-bar-row {
+    margin-bottom: 12px;
+}
+
+.chart-label {
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.chart-track {
+    background-color: var(--ios-surface-neutral);
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.chart-fill {
+    background-color: var(--ios-primary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.6s ease-out;
+}

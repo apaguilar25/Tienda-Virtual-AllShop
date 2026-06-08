@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consola de Gestión</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <header class="top-nav-bar">
+        <div class="nav-title">Panel de Control</div>
+        <button id="open-crud-modal" class="nav-btn">➕</button>
+    </header>
+
+    <main style="padding: 16px;">
+        <div class="segmented-control">
+            <button id="show-metrics" class="segment-btn active">Indicadores</button>
+            <button id="show-crud" class="segment-btn">Inventario</button>
+            <button id="show-sales" class="segment-btn">Despachos</button>
+        </div>
+
+        <section id="sec-metrics">
+            <div class="analytic-box">
+                <h4 style="font-size: 13px; color:var(--text-muted);">INGRESOS GENERALES</h4>
+                <p id="total-revenue-text" style="font-size: 28px; font-weight:700; margin-top:4px;">$0.00</p>
+            </div>
+            <div class="analytic-box">
+                <h4 style="font-size: 13px; color:var(--text-muted);">USUARIOS ACTIVOS VS REGISTRADOS</h4>
+                <p id="total-users-text" style="font-size: 20px; font-weight:600; margin-top:4px;">0 / 0</p>
+            </div>
+            <div class="analytic-box">
+                <h3 style="font-size: 16px; margin-bottom:12px;">Top 3 Artículos Más Vendidos</h3>
+                <div id="graphics-bars-container"></div>
+            </div>
+        </section>
+
+        <section id="sec-crud" style="display: none;">
+            <div class="input-fields-group" id="crud-list-container"></div>
+        </section>
+
+        <section id="sec-sales" style="display: none;">
+            <div class="input-fields-group" id="sales-list-container"></div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="crud-modal">
+        <div class="sheet-container">
+            <h3 style="margin-bottom:14px;" id="modal-action-title">Nuevo Registro</h3>
+            <form id="crud-form">
+                <input type="hidden" id="prod-id">
+                <div class="input-fields-group">
+                    <input type="text" id="prod-title" placeholder="Título del artículo" class="field-input" required>
+                    <input type="number" id="prod-price" placeholder="Precio ($)" class="field-input" step="0.01" required>
+                    <input type="text" id="prod-category" placeholder="Categoría" class="field-input" required>
+                    <input type="url" id="prod-image" placeholder="URL de la imagen" class="field-input" required>
+                </div>
+                <button type="submit" class="btn-prime" style="margin-bottom:10px;">Preservar Artículo</button>
+                <button type="button" id="close-crud-modal" class="btn-prime" style="background-color: var(--bg-neutral); color: var(--text-main);">Cerrar</button>
+            </form>
+        </div>
+    </div>
+
+    <nav class="bottom-tab-bar">
+        <a href="index.html" class="tab-link"><span class="tab-icon">✨</span><span>Inicio</span></a>
+        <a href="tienda.html" class="tab-link"><span class="tab-icon">🛍️</span><span>Catálogo</span></a>
+        <a href="cuenta.html" class="tab-link"><span class="tab-icon">👤</span><span>Perfil</span></a>
+        <a href="admin.html" class="tab-link active"><span class="tab-icon">📊</span><span>Admin</span></a>
+    </nav>
+
+    <script type="module" src="js/pages/admin-page.js"></script>
+</body>
+</html>

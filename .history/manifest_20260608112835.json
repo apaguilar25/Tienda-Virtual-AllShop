@@ -1,0 +1,16 @@
+{
+    "name": "Premium Minimalist Store",
+    "short_name": "PremiumStore",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f2f2f7",
+    "theme_color": "#007aff",
+    "orientation": "portrait-primary",
+    "icons": [
+    {
+        "src": "https://cdn-icons-png.flaticon.com/512/5087/5087847.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }
+    ] 
+}
