@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo — AllShop</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+  <main>
+    <div class="container">
+      <h1>Catálogo</h1>
+      <div class="catalog-layout">
+        <aside class="card filters">
+          <h3>Filtros</h3>
+          <div class="field">
+            <label>Buscar</label>
+            <input type="search" id="searchInput" placeholder="Nombre del producto..." />
+          </div>
+          <div class="field">
+            <label>Categoría</label>
+            <select id="categorySelect"><option value="">Todas</option></select>
+          </div>
+          <div class="field">
+            <label>Precio máximo: <span id="priceLabel">$1000</span></label>
+            <input type="range" id="priceRange" min="0" max="1000" step="5" value="1000" />
+          </div>
+          <button class="btn btn-secondary btn-block" id="resetFilters">Limpiar filtros</button>
+        </aside>
+        <section>
+          <div class="grid products" id="productsGrid"></div>
+          <p id="emptyMsg" class="text-muted hidden">No se encontraron productos.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <div id="footer"></div>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/catalog.js"></script>
+</body>
+</html>

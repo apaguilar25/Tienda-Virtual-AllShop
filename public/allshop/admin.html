@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — AllShop</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+  <main>
+    <div class="container">
+      <h1>Panel de administración</h1>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-tab="dashboard">Dashboard</button>
+        <button class="tab" data-tab="inventory">Inventario</button>
+        <button class="tab" data-tab="sales">Ventas</button>
+      </div>
+
+      <section id="tab-dashboard">
+        <div class="grid stats">
+          <div class="card stat"><div class="num" id="kRevenue">$0</div><div class="lbl">Ingresos totales</div></div>
+          <div class="card stat"><div class="num" id="kOrders">0</div><div class="lbl">Pedidos</div></div>
+          <div class="card stat"><div class="num" id="kUsers">0</div><div class="lbl">Usuarios registrados</div></div>
+          <div class="card stat"><div class="num" id="kActive">0</div><div class="lbl">Usuarios activos</div></div>
+        </div>
+        <div class="card mt-24">
+          <h3>Top 3 productos más vendidos</h3>
+          <div class="bar-chart" id="topChart"></div>
+        </div>
+      </section>
+
+      <section id="tab-inventory" class="hidden">
+        <div class="card">
+          <div class="flex between center">
+            <h3>Productos</h3>
+            <button class="btn" id="newProductBtn">+ Nuevo producto</button>
+          </div>
+          <div class="table-wrap mt-16">
+            <table class="table">
+              <thead><tr><th>Imagen</th><th>Título</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Acciones</th></tr></thead>
+              <tbody id="invBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card mt-16 hidden" id="productEditor">
+          <h3 id="editorTitle">Nuevo producto</h3>
+          <form class="form" id="productForm">
+            <input type="hidden" id="pid"/>
+            <div class="field"><label>Título</label><input id="ptitle" required/></div>
+            <div class="field"><label>Categoría</label><input id="pcategory" required/></div>
+            <div class="field"><label>Precio</label><input id="pprice" type="number" min="0" step="0.01" required/></div>
+            <div class="field"><label>Stock</label><input id="pstock" type="number" min="0" step="1" required/></div>
+            <div class="field"><label>Imagen (URL)</label><input id="pimage" type="url" required/></div>
+            <div class="field"><label>Descripción</label><textarea id="pdesc" rows="3"></textarea></div>
+            <div class="flex gap-8">
+              <button class="btn" type="submit">Guardar</button>
+              <button class="btn btn-secondary" type="button" id="cancelEdit">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="tab-sales" class="hidden">
+        <div class="card">
+          <h3>Historial de ventas</h3>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Fecha</th><th>Cliente</th><th>Items</th><th>Total</th><th>Estado</th></tr></thead>
+              <tbody id="salesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <div id="footer"></div>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producto — AllShop</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>@media(max-width:720px){#productView .card{grid-template-columns:1fr !important;}}</style>
+</head>
+<body>
+  <div id="navbar"></div>
+  <main>
+    <div class="container">
+      <a href="catalog.html">← Volver al catálogo</a>
+      <div id="productView" class="mt-16"></div>
+
+      <section class="section">
+        <h2 class="section-title">Reseñas</h2>
+        <div id="reviewsList"></div>
+        <div class="card mt-16" id="reviewFormWrap">
+          <h3>Deja tu reseña</h3>
+          <div id="starInput" class="star-input" aria-label="Calificación">
+            <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+          </div>
+          <div class="field mt-16">
+            <textarea id="reviewText" rows="3" placeholder="Cuéntanos tu experiencia..."></textarea>
+          </div>
+          <button class="btn" id="submitReview">Publicar reseña</button>
+          <div class="error-msg" id="reviewMsg"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <div id="footer"></div>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>
