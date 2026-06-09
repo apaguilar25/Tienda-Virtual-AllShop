@@ -61,8 +61,10 @@
           <div class="nav-links" id="navLinks">
             ${links.map(l => `<a href="${l.href}" class="${active === l.key ? "active" : ""}">${l.label}</a>`).join("")}
             ${s
-              ? `<a href="profile.html" class="${active === "profile" ? "active" : ""}">Perfil</a>
-                 <a href="#" onclick="logout();return false;">Salir</a>`
+              ? `<a href="profile.html" class="profile-pill ${active === "profile" ? "active" : ""}" title="Mi perfil">
+                   <img class="profile-pill-avatar" src="${s.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(s.name || 'U')}" alt=""/>
+                   <span>Perfil</span>
+                 </a>`
               : `<a href="login.html" class="${active === "login" ? "active" : ""}">Entrar</a>
                  <a href="register.html">Registro</a>`}
           </div>

@@ -323,3 +323,29 @@ footer {
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 @keyframes popIn { from{opacity:0; transform:scale(.85);} to{opacity:1; transform:scale(1);} }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* Profile pill in navbar */
+.profile-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px 4px 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text) !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background .15s ease, border-color .15s ease;
+}
+.profile-pill:hover { background: var(--border); border-color: var(--primary); }
+.profile-pill.active { border-color: var(--primary); color: var(--primary) !important; }
+.profile-pill-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
