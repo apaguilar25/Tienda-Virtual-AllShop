@@ -44,20 +44,6 @@
     grid.querySelectorAll("[data-add]").forEach(b => b.onclick = () => addToCart(b.dataset.add));
   }
 
-  function addToCart(id) {
-    const s = DB.getSession();
-    const cart = DB.getCart(s?.id);
-    const item = cart.find(i => i.id === id);
-    if (item) item.qty += 1;
-    else {
-      const p = DB.getProduct(id);
-      cart.push({ id: p.id, title: p.title, price: p.price, image: p.image, qty: 1 });
-    }
-    DB.setCart(s?.id, cart);
-    toast("Producto añadido al carrito");
-    renderNavbar("catalog");
-  }
-
   document.getElementById("searchInput").oninput = render;
   sel.onchange = render;
   range.oninput = render;

@@ -133,4 +133,15 @@
   renderDashboard();
   renderInventory();
   renderSales();
+
+  // Refrescar admin cuando hay cambios desde otra pestaña (compras, registros, etc.)
+  window.addEventListener("storage", e => {
+    if (!e.key) return;
+    if (e.key === DB.KEYS.ORDERS || e.key === DB.KEYS.ACTIVE || e.key === DB.KEYS.USERS) {
+      renderDashboard(); renderSales();
+    }
+    if (e.key === DB.KEYS.PRODUCTS) renderInventory();
+  });
+  // Y refrescar el dashboard cada 10s para reflejar usuarios activos en tiempo casi-real
+  setInterval(() => { renderDashboard(); renderSales(); }, 10000);
 })();

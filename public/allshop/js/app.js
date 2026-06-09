@@ -24,7 +24,7 @@
     el.textContent = msg;
     el.classList.add("show");
     clearTimeout(el._t);
-    el._t = setTimeout(() => el.classList.remove("show"), 2200);
+    el._t = setTimeout(() => el.classList.remove("show"), 1800);
   };
 
   // ---------- Sesión / Auth helpers ----------
@@ -53,7 +53,7 @@
 
     const theme = document.documentElement.getAttribute("data-theme");
     const html = `
-      <nav class="navbar">
+      <nav class="navbar" id="navbar">
         <div class="nav-inner">
           <a href="index.html" class="brand">
             <span class="logo">A</span> AllShop
@@ -78,6 +78,58 @@
     if (slot) slot.outerHTML = html;
   };
 
+  // Actualiza sólo el contador del carrito sin re-renderizar todo el navbar
+  window.updateCartCount = function () {
+    const s = DB.getSession();
+    const count = DB.getCart(s?.id).reduce((a, b) => a + b.qty, 0);
+    document.querySelectorAll(".cart-count").forEach(el => { el.textContent = count; });
+  };
+
+  // Añadir al carrito desde cualquier página + actualización en tiempo real
+  window.addToCart = function (productId, qty = 1) {
+    const p = DB.getProduct(productId);
+    if (!p) return;
+    const s = DB.getSession();
+    const cart = DB.getCart(s?.id);
+    const item = cart.find(i => i.id === p.id);
+    if (item) item.qty += qty;
+    else cart.push({ id: p.id, title: p.title, price: p.price, image: p.image, qty });
+    DB.setCart(s?.id, cart);
+    updateCartCount();
+    toast("Producto añadido al carrito");
+  };
+
+  // Sincroniza el contador entre pestañas/ventanas
+  window.addEventListener("storage", e => {
+    if (e.key === DB.KEYS.CARTS) updateCartCount();
+  });
+
+  // ---------- Popup de redirección a redes sociales ----------
+  window.socialRedirect = function (network) {
+    const labels = { instagram: "Instagram", x: "X (Twitter)", facebook: "Facebook" };
+    const icons = { instagram: "📷", x: "𝕏", facebook: "f" };
+    const back = document.createElement("div");
+    back.className = "social-popup-backdrop";
+    back.innerHTML = `
+      <div class="social-popup" role="dialog" aria-modal="true">
+        <div class="icon ${network}">${icons[network]}</div>
+        <h3>Redirigiendo…</h3>
+        <p>Te estamos llevando a la cuenta oficial de AllShop en ${labels[network]}.</p>
+        <div class="spinner"></div>
+      </div>`;
+    document.body.appendChild(back);
+    setTimeout(() => back.remove(), 2500);
+  };
+
+  // Event delegation: funciona aunque el onclick inline falle o el footer no se haya renderizado,
+  // y no requiere sesión iniciada.
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest("[data-social]");
+    if (!a) return;
+    e.preventDefault();
+    window.socialRedirect(a.getAttribute("data-social"));
+  });
+
   // ---------- Footer ----------
   window.renderFooter = function () {
     const online = navigator.onLine;
@@ -96,7 +148,11 @@
           </div>
           <div>
             <h4>Redes</h4>
-            <p><a href="#">Instagram</a> · <a href="#">X</a> · <a href="#">Facebook</a></p>
+            <p>
+              <a href="#" data-social="instagram" onclick="socialRedirect('instagram');return false;">Instagram</a> ·
+              <a href="#" data-social="x" onclick="socialRedirect('x');return false;">X</a> ·
+              <a href="#" data-social="facebook" onclick="socialRedirect('facebook');return false;">Facebook</a>
+            </p>
           </div>
           <div>
             <h4>Estado</h4>
@@ -173,7 +229,7 @@
   // ---------- Registrar Service Worker ----------
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/allshop/sw.js").catch(() => {});
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
     });
   }
 

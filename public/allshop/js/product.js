@@ -9,7 +9,7 @@
   if (!p) { view.innerHTML = "<p>Producto no encontrado.</p>"; return; }
 
   view.innerHTML = `
-    <div class="card" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div class="card product-detail">
       <div style="background:#fff;border-radius:12px;padding:24px;display:grid;place-items:center;">
         <img src="${p.image}" alt="${p.title}" style="max-height:340px;object-fit:contain;" />
       </div>
@@ -24,15 +24,7 @@
     </div>
   `;
 
-  document.getElementById("addBtn").onclick = () => {
-    const s = DB.getSession();
-    const cart = DB.getCart(s?.id);
-    const item = cart.find(i => i.id === p.id);
-    if (item) item.qty++; else cart.push({ id: p.id, title: p.title, price: p.price, image: p.image, qty: 1 });
-    DB.setCart(s?.id, cart);
-    toast("Añadido al carrito");
-    renderNavbar("catalog");
-  };
+  document.getElementById("addBtn").onclick = () => addToCart(p.id);
 
   function renderReviews() {
     const list = DB.getReviews(p.id);
