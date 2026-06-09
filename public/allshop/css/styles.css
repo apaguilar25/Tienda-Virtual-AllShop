@@ -349,3 +349,194 @@ footer {
   border: 1px solid var(--border);
   flex-shrink: 0;
 }
+
+
+/* ===== Responsive fixes ===== */
+html, body { overflow-x: hidden; max-width: 100%; }
+img, video { max-width: 100%; height: auto; }
+.card, .product, .cart-item, main, .container { min-width: 0; }
+.cart-item > div { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+.cart-item img { width: 80px; height: 80px; }
+
+@media (max-width: 600px) {
+  .container { padding: 0 12px; }
+  .card { padding: 14px; }
+  .nav-inner { padding: 10px 12px; gap: 8px; }
+  .nav-actions { gap: 6px; }
+  .icon-btn { padding: 5px 8px; }
+  .profile-pill span { display: none; }
+  .profile-pill { padding: 3px; }
+  .hero { padding: 24px 16px; min-height: 340px; border-radius: 14px; }
+  .products { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .footer-inner { padding: 0 12px; }
+  h1 { font-size: 1.5rem; }
+  .section { margin: 28px 0; }
+}
+
+
+/* ==========================================================================
+   Filtros Fijos en Móvil con Minimizado Manual (Sin Glitch de Scroll)
+   ========================================================================== */
+
+/* --- ESTADOS EN ESCRITORIO (Por defecto) --- */
+.filters-toggle { 
+  display: none !important; /* El botón NO debe aparecer jamás en PC */
+}
+.filters h3 {
+  display: block !important; /* El título H3 original DEBE verse en PC */
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* --- ESTADOS EN MÓVIL (Cambio automático al reducir pantalla) --- */
+@media (max-width: 820px) {
+  .filters {
+    position: sticky;
+    top: 60px; /* Se queda pegado justo debajo de tu navbar */
+    z-index: 20;
+    background: var(--surface);
+    
+    /* Control estricto de altura para la transición */
+    max-height: 340px; 
+    overflow: hidden;
+    transition: max-height 0.25s ease-out, padding 0.25s ease-out, box-shadow 0.25s ease-out;
+    
+    /* Pequeña sombra para diferenciarlo del catálogo que pasa por debajo */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+  }
+
+  /* ESTADO MINIMIZADO: Se activa solo cuando agregas la clase .collapsed vía JS */
+  .filters.collapsed {
+    max-height: 44px; /* Altura exacta para que solo se vea el botón y la flecha */
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    box-shadow: var(--shadow);
+  }
+
+  /* Desaparece los inputs por completo al colapsar para que no estorben */
+  .filters.collapsed > *:not(.filters-toggle) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.1s ease, visibility 0.1s ease;
+  }
+
+  /* El botón que el usuario toca para abrir/cerrar */
+  .filters-toggle {
+    display: flex !important; /* Se activa exclusivamente en móviles */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 6px 0;
+    margin: 0;
+  }
+
+  /* La flechita indicadora (Apunta hacia ARRIBA cuando está abierto) */
+  .filters-toggle::after { 
+    content: "▴"; 
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+  }
+  
+  /* La flechita rota hacia ABAJO cuando el usuario lo minimiza */
+  .filters.collapsed .filters-toggle::after { 
+    transform: rotate(180deg); 
+  }
+
+  /* Ocultamos el H3 clásico de escritorio en móviles ya que el botón toma su texto */
+  .filters h3 { 
+    display: none !important; 
+  }
+}
+
+
+
+/* ==========================================================================
+   Ajustes Críticos de Responsividad para el Formulario de Autenticación (Login/Registro)
+   ========================================================================== */
+
+/* Asegurar que la tarjeta de autenticación sea completamente flexible */
+.auth-wrap {
+  width: 100%;
+  max-width: 420px; /* Evita que se estire en pantallas grandes */
+  margin: 40px auto;
+  padding: 0 16px; /* Margen de seguridad interno para que no toque los bordes del dispositivo */
+  box-sizing: border-box;
+}
+
+/* Forzar a que la tarjeta (card) no use un alto fijo y contenga su data */
+.auth-wrap .card {
+  height: auto !important; /* Elimina cualquier alto fijo heredado */
+  min-height: min-content;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden; /* Evita que sombras o decoraciones desborden */
+}
+
+/* Controlar los elementos del formulario para que no se salgan de la tarjeta */
+.auth-wrap .form {
+  width: 100%;
+  grid-template-columns: 1fr; /* Fuerza una sola columna vertical */
+}
+
+.auth-wrap .field input, 
+.auth-wrap .field select, 
+.auth-wrap .field textarea {
+  width: 100% !important; /* Obliga al input a respetar el ancho de su contenedor */
+  max-width: 100%;
+  box-sizing: border-box; /* Crucial para que el padding interno no rompa el ancho total */
+}
+
+/* Media Query específica para teléfonos muy pequeños (Móviles verticales) */
+@media (max-width: 480px) {
+  .auth-wrap {
+    margin: 20px auto; /* Reduce el espacio vertical externo en pantallas compactas */
+  }
+
+  .auth-wrap .card {
+    padding: 16px; /* Reduce el padding interno para ganar espacio para los inputs */
+    border-radius: 12px;
+  }
+
+  /* Reducir tipografías gigantes que causan saltos de línea destructivos */
+  .auth-wrap h2, 
+  .auth-wrap h1 {
+    font-size: 1.6rem !important; /* Ajusta el tamaño del título de bienvenida */
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .auth-wrap p {
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  /* Hacer los botones y campos cómodos para pantallas táctiles pero compactos */
+  .auth-wrap .field label {
+    font-size: 0.85rem;
+  }
+
+  .auth-wrap .field input {
+    padding: 8px 10px; /* Reduce ligeramente el tamaño interno del campo */
+    font-size: 0.95rem;
+  }
+
+  .auth-wrap .btn {
+    padding: 12px; /* Mantiene un área táctil óptima (UX) sin comerse la pantalla */
+    font-size: 1rem;
+  }
+  
+  .error-msg {
+    font-size: 0.8rem;
+    margin-top: 2px;
+  }
+}

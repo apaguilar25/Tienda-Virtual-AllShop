@@ -3,6 +3,24 @@
   renderFooter();
   await ensureProductsSeeded();
 
+  // NUEVA LÓGICA MANUAL DE COLAPSADO DE FILTROS PARA MÓVILES:
+const filtersEl = document.querySelector(".filters");
+if (filtersEl) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "filters-toggle";
+  btn.textContent = "Filtros";
+  filtersEl.prepend(btn);
+
+  // Control manual absoluto: abre y cierra al hacer clic
+  btn.onclick = () => filtersEl.classList.toggle("collapsed");
+
+  // Iniciar colapsado/minimizado por defecto si el usuario entra desde un móvil
+  if (window.innerWidth <= 820) {
+    filtersEl.classList.add("collapsed");
+  }
+}
+
   const products = DB.getProducts();
   const cats = [...new Set(products.map(p => p.category))];
   const sel = document.getElementById("categorySelect");
